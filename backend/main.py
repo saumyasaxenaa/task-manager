@@ -34,3 +34,15 @@ def delete_task(id: int, db: Session = Depends(get_db)):
     task.delete(synchronize_session=False)
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@app.put("/tasks/{id}", response_model=schemas.TaskResponse)
+def update_task(id: int, updated_task: schemas.TaskCreate, db: Session = Depends(get_db)):
+    task_query = db.query(models.Task).filter(models.Task.id == id)
+    task = task_query.first()
+    if task == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"task with id: {id} does not exist")
+    task_query.update(updated_task.dict(), synchronize_session=False)
+    db.commit()
+    return task_query.first()
