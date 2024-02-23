@@ -25,8 +25,12 @@ async def add_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
     return new_task
 
 
-@app.get("/tasks/{id}", response_model=schemas.TaskResponse)
-async def get_task(id: int, db: Session = Depends(get_db)):
-    task = db.query(models.Task).filter(models.Task.id == id).first()
-    if not task:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'')
+@app.delete("/tasks/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_task(id: int, db: Session = Depends(get_db)):
+    task = db.query(models.Task).filter(models.Task.id == id)
+    if task.first() == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"task with id: {id} does not exist")
+    task.delete(synchronize_session=False)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
