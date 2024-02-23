@@ -3,21 +3,25 @@ from datetime import datetime
 
 
 class Task(BaseModel):
-    id: int
     task: str
     low_priority: bool = False
     medium_priority: bool = False
     high_priority: bool = False
 
-    class Config:
-        orm_mode = True
+
+class TaskBase(BaseModel):
+    task: str
+    low_priority: bool = False
+    medium_priority: bool = False
+    high_priority: bool = False
 
 
-# class TaskCreate(Task):
-#     pass
+class TaskCreate(TaskBase):
+    pass
 
 
-class TaskResponse(Task):
+class TaskResponse(TaskBase):
+    id: int
     created_at: datetime
 
     class Config:
