@@ -4,11 +4,9 @@ from database import Base
 
 
 class Task(Base):
-    __tablename__ = "tasks"
+    __tablename__ = "updated_tasks"
 
     id = Column(Integer, primary_key=True, index=True)
     task = Column(String)
     created_at = Column(DateTime, default=datetime.now())
-    low_priority = Column(Boolean)
-    medium_priority = Column(Boolean)
-    high_priority = Column(Boolean)
+    priority = Column(Boolean)
