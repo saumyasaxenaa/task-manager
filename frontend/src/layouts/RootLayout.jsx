@@ -1,8 +1,9 @@
 import { Grid, GridItem } from "@chakra-ui/react";
+import Sidebar from "../components/Sidebar";
 
 const RootLayout = () => {
   return (
-    <Grid templateColumns={"repeat(6, 1fr)"} bg={"gray.50"}>
+    <Grid templateColumns={"repeat(6, 3fr)"} bg={"gray.50"}>
       <GridItem
         as={"aside"}
         colSpan={{ base: 6, lg: 2, xl: 1 }}
@@ -10,7 +11,7 @@ const RootLayout = () => {
         minH={{ lg: "100vh" }}
         p={{ base: "20px", lg: "30px" }}
       >
-        TEST
+        <Sidebar />
       </GridItem>
     </Grid>
   );
