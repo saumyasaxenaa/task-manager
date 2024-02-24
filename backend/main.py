@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, status, Response
 from typing import List
 import models
 import schemas
-from database import engine, SessionLocal, get_db
+from database import engine, get_db
 from sqlalchemy.orm import Session
 
 models.Base.metadata.create_all(bind=engine)
