@@ -34,16 +34,27 @@ const Tasks = () => {
   return (
     <TaskContext.Provider value={{ tasks, fetchTasks }}>
       <AddTask />
-      <Stack spacing={5} textAlign={"center"}>
-        {tasks.map((task) => (
-          <TodoHelper
-            key={task.id}
-            task={task.task}
-            priority={task.priority}
-            fetchTasks={fetchTasks}
-          />
-        ))}
-      </Stack>
+      <Box
+        maxW={"500px"}
+        p={4}
+        bg={"gray.200"}
+        borderRadius={"12px"}
+        display="flex"
+        justifyContent="center"
+        m={"auto"}
+        mt={"10px"}
+      >
+        <Stack spacing={5} textAlign={"center"}>
+          {tasks.map((task) => (
+            <TodoHelper
+              key={task.id}
+              task={task.task}
+              priority={task.priority}
+              fetchTasks={fetchTasks}
+            />
+          ))}
+        </Stack>
+      </Box>
     </TaskContext.Provider>
   );
 };
