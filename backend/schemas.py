@@ -2,9 +2,9 @@ from pydantic import BaseModel
 from datetime import datetime
 
 
-class Task(BaseModel):
-    task: str
-    priority: bool = False
+# class Task(BaseModel):
+#     task: str
+#     priority: bool = False
 
 
 class TaskBase(BaseModel):
